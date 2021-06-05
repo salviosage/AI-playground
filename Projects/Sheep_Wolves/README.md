@@ -1,0 +1,1 @@
+Applying search Algorithms (BFS, DFS, Uniform cost, Greedy and Astar) to the sheep and wolves game
