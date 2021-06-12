@@ -24,14 +24,13 @@ class SemanticNetsAgent:
         
         pass
 # Node data structure
-
 class Node:
     def __init__(self, state, parent, operator, depth,position):
         # Contains the state of the node
         self.state = state
         # Contains the node that generated this node
         self.parent = parent
-        # Contains the operation that generated this node from the parent
+        # Contains the operation that generated this node from the parent ex moving 1 sheep and one wolf
         self.operator = operator
         # Contains the depth of this node (parent.depth +1)
         self.depth = depth
@@ -70,7 +69,6 @@ def move_right(state,sheeps=0,wolthes=0):
         return None
     
     elif(sheeps>state[0] or wolthes>state[1]):
-#         print(state[2])
         # Can't move it, return None
         return None
     else:
@@ -82,9 +80,7 @@ def move_right(state,sheeps=0,wolthes=0):
         if new_state[0] < new_state[1] or new_state[2] < new_state[3]:
             # Can't move it, dead state return None
             return None
-        
         return new_state
-    
 
 def create_node(state, parent, operator, depth=0,position='L'):
     return Node(state, parent, operator, depth,position)
@@ -92,7 +88,7 @@ def create_node(state, parent, operator, depth=0,position='L'):
 
 
 def expand_node(node):
-    """Returns a list of expanded nodes"""
+    """It will returns a list of expanded nodes"""
     expanded_nodes = []
     if(node.position=='L'):
         expanded_nodes.append(create_node(move_right(node.state,0,1), node, [0,1], node.depth + 1,'R'))
@@ -111,7 +107,9 @@ def expand_node(node):
     expanded_nodes = [node for node in expanded_nodes if node.state != None]  # list comprehension!
     return expanded_nodes
 
-
+# implement A* search one of the optimal search algorithm 
+# A* search is being used by google map to find optimal search 
+# it is basically help determine best optimal move toward the goal with a help of heuristic f 
 def a_star(start, goal):
     start_node=create_node(start,None,None,1,'L')
     fringe=[]
@@ -127,7 +125,6 @@ def a_star(start, goal):
         fringe.extend(new_nodes)
         for item in fringe:
             h(item)
-            item.heuristic+=(item.depth/10000)
         fringe.sort(key =lambda x: x.heuristic)
         if not fringe:
             return []
@@ -141,10 +138,10 @@ def a_star(start, goal):
     return path
 
 
-
-
+#let's define huristic function
+# heuristc function is gonna look into how fr are we with to the goal + some little portion of node depth
 def h(state):
     dmatch=0
-    dmatch+=(state.state[0]-state.state[2] )+ (state.state[1]-state.state[3])
-#             )+ (state.state[1]-state.state[3])
-    state.heuristic=dmatch
+    dmatch+=((state.state[0]-state.state[2] )+ (state.state[1]-state.state[3])
+            )+ (state.state[1]-state.state[3])
+    state.heuristic=dmatch +(state.depth/10000)
