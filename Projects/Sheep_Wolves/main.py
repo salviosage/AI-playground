@@ -1,28 +1,31 @@
-from SemanticNetsAgent import SemanticNetsAgent
+from BlockWorldAgent import BlockWorldAgent
 
 def test():
-    #This will test  SemanticNetsAgent
+    #This will test your BlockWorldAgent
+	#with eight initial test cases.
+    test_agent = BlockWorldAgent()
 
-    test_agent = SemanticNetsAgent()
-    print(test_agent.solve(10, 4))
-    print(test_agent.solve(13, 12))
-    print(test_agent.solve(13, 13))
-    print(test_agent.solve(14, 5))
-    print(test_agent.solve(15, 3))
-    print(test_agent.solve(1, 1))
-    print(test_agent.solve(2, 1))
-    print(test_agent.solve(4, 4))
-    print(test_agent.solve(2, 2))
-    print(test_agent.solve(3, 3))
-    print(test_agent.solve(5, 3))
-    print(test_agent.solve(5, 5))
-    print(test_agent.solve(6, 2))
-    print(test_agent.solve(6, 3))
-    print(test_agent.solve(6, 4))
-    print(test_agent.solve(6, 6))
-    print(test_agent.solve(7, 3))
-    print(test_agent.solve(8, 8))
-    print(test_agent.solve(9, 9))
+    initial_arrangement_1 = [["A", "B", "C"], ["D", "E"]]
+    goal_arrangement_1 = [["A", "C"], ["D", "E", "B"]]
+    goal_arrangement_2 = [["A", "B", "C", "D", "E"]]
+    goal_arrangement_3 = [["D", "E", "A", "B", "C"]]
+    goal_arrangement_4 = [["C", "D"], ["E", "A", "B"]]
+
+    print(test_agent.solve(initial_arrangement_1, goal_arrangement_1))
+    print(test_agent.solve(initial_arrangement_1, goal_arrangement_2))
+    print(test_agent.solve(initial_arrangement_1, goal_arrangement_3))
+    print(test_agent.solve(initial_arrangement_1, goal_arrangement_4))
+
+    initial_arrangement_2 = [["A", "B", "C"], ["D", "E", "F"], ["G", "H", "I"]]
+    goal_arrangement_5 = [["A", "B", "C", "D", "E", "F", "G", "H", "I"]]
+    goal_arrangement_6 = [["I", "H", "G", "F", "E", "D", "C", "B", "A"]]
+    goal_arrangement_7 = [["H", "E", "F", "A", "C"], ["B", "D"], ["G", "I"]]
+    goal_arrangement_8 = [["F", "D", "C", "I", "G", "A"], ["B", "E", "H"]]
+
+    print(test_agent.solve(initial_arrangement_2, goal_arrangement_5))
+    print(test_agent.solve(initial_arrangement_2, goal_arrangement_6))
+    print(test_agent.solve(initial_arrangement_2, goal_arrangement_7))
+    print(test_agent.solve(initial_arrangement_2, goal_arrangement_8))
 
 if __name__ == "__main__":
     test()
